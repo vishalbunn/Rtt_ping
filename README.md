@@ -234,20 +234,8 @@ git push origin feature/new-feature
 
 Create Pull Request
 
-📜 License
-
-MIT License
-
-👨‍💻 Author
-
-Swarup2908
-
 GitHub Repository:
 https://github.com/Swarup2908/Rtt_monitor
-
-⭐ Your Contribution (You should add this)
-
-Since you worked on this, you should include something like:
 
 Contributions
 
