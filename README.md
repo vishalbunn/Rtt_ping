@@ -16,7 +16,6 @@
 
 ![License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)
 ![Status](https://img.shields.io/badge/Status-Active-brightgreen?style=for-the-badge)
-![Forked](https://img.shields.io/badge/Forked_from-Swarup2908-blue?style=for-the-badge&logo=github)
 
 </div>
 
@@ -86,25 +85,7 @@ The architecture is fully non-blocking — monitoring tasks run in parallel work
 
 ## 🔍 Core Features
 
-### 1. RTT Latency Monitoring
-Calculates round-trip time between anchor nodes and target domains.
-Tracks **min**, **max**, and **average RTT** to surface latency spikes early.
-
-### 2. Ping Monitoring
-Executes real ping commands from anchor nodes and records:
-- Packet transmission counts
-- Packet loss percentages
-- RTT statistics per hop
-
-### 3. DNS Query Monitoring
-Validates domain name resolution from distributed anchors to detect:
-- DNS propagation failures
-- Regional resolution inconsistencies
-
-### 4. Anchor-Based Distributed Testing
-Each anchor node independently runs ping, DNS, and command checks — enabling multi-region performance visibility from a single dashboard.
-
-### 5. Async Task Processing
+### Async Task Processing
 All monitoring tasks are offloaded to **Celery workers** scheduled by **Celery Beat**, enabling:
 - Continuous, parallel monitoring
 - Scalable endpoint coverage
@@ -211,6 +192,6 @@ This project is licensed under the **MIT License**.
 
 <div align="center">
 
-*Forked from [Swarup2908/Rtt_monitor](https://github.com/Swarup2908/Rtt_monitor) · Enhanced by [vishalbunn](https://github.com/vishalbunn)*
+*Built by [vishalbunn](https://github.com/vishalbunn) · Indian Internet Foundation*
 
 </div>
