@@ -1,247 +1,216 @@
-🚀 RTT Monitor – Distributed Network Monitoring Platform
-📌 Overview
+<div align="center">
 
-RTT Monitor is a Django-based network monitoring platform designed to track and analyze Round Trip Time (RTT) and network diagnostics from distributed anchor nodes.
+# 📡 RTT Monitor
 
-The system performs real-time monitoring of network endpoints, collecting data from APIs and executing ping and DNS queries to evaluate network performance.
+### Distributed Network Monitoring Platform
 
-It uses Celery and Redis to run background monitoring tasks asynchronously, enabling scalable and continuous monitoring without blocking the application.
+*Real-time latency tracking, ping diagnostics, and DNS resolution checks across distributed anchor nodes — built for engineers who need to catch network failures before users do.*
 
-The platform integrates with external APIs from:
+<br/>
 
-https://services.aiori.in/
+![Python](https://img.shields.io/badge/Python-3.7+-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![Django](https://img.shields.io/badge/Django-092E20?style=for-the-badge&logo=django&logoColor=white)
+![DRF](https://img.shields.io/badge/Django_REST_Framework-FF1709?style=for-the-badge&logo=django&logoColor=white)
+![Celery](https://img.shields.io/badge/Celery-37814A?style=for-the-badge&logo=celery&logoColor=white)
+![Redis](https://img.shields.io/badge/Redis-DC382D?style=for-the-badge&logo=redis&logoColor=white)
 
-to fetch anchor data, domains, and command results.
+![License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-Active-brightgreen?style=for-the-badge)
+![Forked](https://img.shields.io/badge/Forked_from-Swarup2908-blue?style=for-the-badge&logo=github)
 
-🧠 What This Application Monitors
+</div>
 
-The platform continuously monitors:
+---
 
-• RTT latency values
-• Ping responses from distributed anchors
-• DNS query resolution
-• API response health
-• Network endpoint availability
+## 🧭 Overview
 
-This helps detect network instability, latency spikes, or endpoint failures in real time.
+**RTT Monitor** is a Django-powered platform that continuously tracks network health from multiple geographic locations using distributed anchor nodes. It runs asynchronous background workers via **Celery + Redis** to perform non-stop ping, DNS, and latency checks — without ever blocking the main application.
 
-⚙️ Tech Stack
+Integrated with the **[services.aiori.in](https://services.aiori.in/)** API, it fetches live anchor nodes and domain data to run real-world network diagnostics at scale.
 
-Backend
+---
 
-Django
+## 🧠 What It Monitors
 
-Django REST Framework
+| Check | What's Tracked |
+|---|---|
+| 📶 **RTT Latency** | Min / Max / Average round-trip time |
+| 📦 **Ping** | Packet transmission, packet loss, RTT stats |
+| 🌐 **DNS Resolution** | Domain resolution from distributed anchors |
+| 🔌 **API Health** | Endpoint availability and response times |
+| 🗺️ **Anchor Nodes** | Distributed geographic network testing points |
 
-Celery
+---
 
-Celery Beat
+## ⚙️ Tech Stack
 
-Redis
+**Backend**
+- [Django](https://www.djangoproject.com/) — web framework and data layer
+- [Django REST Framework](https://www.django-rest-framework.org/) — API endpoints
+- [Celery](https://docs.celeryq.dev/) — async task processing
+- [Celery Beat](https://docs.celeryq.dev/en/stable/userguide/periodic-tasks.html) — periodic task scheduler
+- [Redis](https://redis.io/) — message broker and result backend
 
-Networking
+**Networking**
+- Ping-based latency measurement
+- DNS query monitoring
+- Distributed anchor-based network testing
 
-Ping monitoring
+---
 
-DNS query monitoring
+## 🏗️ Architecture
 
-Anchor-based distributed checks
-
-Infrastructure
-
-Python
-
-REST APIs
-
-Async background workers
-
-🏗 System Architecture
+```
 Django Web App
-      │
       │
       ▼
 Celery Task Queue
       │
-      │
       ▼
 Redis Message Broker
-      │
       │
       ▼
 Background Workers
       │
-      │
       ▼
 External API (services.aiori.in)
       │
-      │
       ▼
 Network Data Collection
-(Ping / DNS / RTT)
+  (Ping / DNS / RTT)
+```
 
-The architecture ensures high scalability and non-blocking monitoring operations.
+The architecture is fully non-blocking — monitoring tasks run in parallel workers, keeping the web layer responsive while continuous checks run in the background.
 
-🔍 Core Functionalities
-1️⃣ API Monitoring
+---
 
-The system continuously fetches data from external APIs to monitor:
+## 🔍 Core Features
 
-• Domain endpoints
-• Anchor nodes
-• Command execution results
+### 1. RTT Latency Monitoring
+Calculates round-trip time between anchor nodes and target domains.
+Tracks **min**, **max**, and **average RTT** to surface latency spikes early.
 
-API health and response times are tracked.
+### 2. Ping Monitoring
+Executes real ping commands from anchor nodes and records:
+- Packet transmission counts
+- Packet loss percentages
+- RTT statistics per hop
 
-2️⃣ RTT Monitoring
+### 3. DNS Query Monitoring
+Validates domain name resolution from distributed anchors to detect:
+- DNS propagation failures
+- Regional resolution inconsistencies
 
-RTT (Round Trip Time) is calculated to determine the latency between anchor nodes and target domains.
+### 4. Anchor-Based Distributed Testing
+Each anchor node independently runs ping, DNS, and command checks — enabling multi-region performance visibility from a single dashboard.
 
-Metrics collected:
+### 5. Async Task Processing
+All monitoring tasks are offloaded to **Celery workers** scheduled by **Celery Beat**, enabling:
+- Continuous, parallel monitoring
+- Scalable endpoint coverage
+- Zero impact on web app performance
 
-• Minimum RTT
-• Maximum RTT
-• Average RTT
+---
 
-These metrics help identify network latency issues.
+## 📊 Monitoring Workflow
 
-3️⃣ Ping Monitoring
+```
+1. Fetch domain + anchor data from API
+        ↓
+2. Celery Beat triggers scheduled tasks
+        ↓
+3. Workers execute ping + DNS queries
+        ↓
+4. RTT values are calculated
+        ↓
+5. Results stored and analyzed
+        ↓
+6. Network health insights surfaced
+```
 
-The system runs ping commands to evaluate network connectivity.
+---
 
-Data collected includes:
+## 🚀 Getting Started
 
-• Packet transmission
-• Packet loss
-• RTT statistics
+### Prerequisites
+- Python 3.7+
+- Redis server running locally
 
-4️⃣ DNS Query Monitoring
+### Installation
 
-DNS resolution checks ensure that domain names resolve correctly from different network anchors.
+```bash
+# Clone the repository
+git clone https://github.com/vishalbunn/Rtt_ping.git
+cd Rtt_ping
 
-This helps detect:
-
-• DNS propagation issues
-• DNS resolution failures
-
-5️⃣ Anchor-Based Network Testing
-
-The monitoring system uses distributed anchors to run network tests.
-
-Each anchor can perform:
-
-• Ping requests
-• DNS queries
-• Command executions
-
-This allows testing network performance from multiple geographic locations.
-
-⚡ Asynchronous Task Processing
-
-Monitoring tasks run in the background using Celery workers, which allows:
-
-• Continuous monitoring
-• Parallel network checks
-• Scalable endpoint monitoring
-
-Celery Beat schedules periodic tasks.
-
-📊 Example Monitoring Workflow
-
-1️⃣ System fetches domain and anchor data from API
-
-2️⃣ Celery worker triggers monitoring tasks
-
-3️⃣ Ping and DNS queries are executed
-
-4️⃣ RTT values are calculated
-
-5️⃣ Results are stored and analyzed
-
-6️⃣ Network health insights are generated
-
-📦 Requirements
-
-Python 3.7+
-
-Django
-
-Celery
-
-Redis
-
-⚙️ Installation
-1️⃣ Clone Repository
-git clone https://github.com/Swarup2908/Rtt_monitor.git
-cd Rtt_monitor
-2️⃣ Create Virtual Environment
+# Create and activate virtual environment
 python -m venv venv
+source venv/bin/activate        # Linux/Mac
+venv\Scripts\activate           # Windows
 
-Activate environment
-
-Windows
-
-venv\Scripts\activate
-
-Linux / Mac
-
-source venv/bin/activate
-3️⃣ Install Dependencies
+# Install dependencies
 pip install -r requirements.txt
-4️⃣ Start Redis
+```
+
+### Running the Platform
+
+```bash
+# Start Redis
 redis-server
-5️⃣ Run Django Server
+
+# Run Django server
 python manage.py runserver
-6️⃣ Start Celery Worker
+
+# Start Celery worker
 celery -A rtt_monitor worker --loglevel=info
-7️⃣ Start Celery Beat (Scheduler)
+
+# Start Celery Beat scheduler
 celery -A rtt_monitor beat --loglevel=info
-🌐 External API Integration
+```
 
-The system integrates with:
+---
 
-https://services.aiori.in/
+## 🌐 External API Integration
 
-Used for:
+The platform integrates with **[services.aiori.in](https://services.aiori.in/)** to:
 
-• Fetching anchor nodes
-• Retrieving domain lists
-• Collecting command results
-• Network diagnostics
+- Fetch available anchor nodes
+- Retrieve monitored domain lists
+- Collect distributed command results
+- Pull real-time network diagnostics
 
-📈 Key Benefits
+---
 
-✔ Real-time network performance monitoring
-✔ Distributed network testing with anchors
-✔ Scalable asynchronous processing
-✔ API health monitoring
-✔ Detect latency and network issues early
+## ✅ Key Benefits
 
-🤝 Contributing
+- ⚡ **Real-time** network performance monitoring
+- 🗺️ **Distributed** testing from multiple geographic anchors
+- 🔄 **Scalable** async processing via Celery workers
+- 🔌 **API health** tracking with response time analysis
+- 🚨 **Early detection** of latency spikes and endpoint failures
 
-Fork the repository
+---
 
-Create feature branch
+## 🤝 Contributing
 
-git checkout -b feature/new-feature
+```bash
+# Fork the repo, then:
+git checkout -b feature/your-feature
+git commit -m "Add your feature"
+git push origin feature/your-feature
+# Open a Pull Request
+```
 
-Commit changes
+---
 
-git commit -m "Add new feature"
+## 📄 License
 
-Push changes
+This project is licensed under the **MIT License**.
 
-git push origin feature/new-feature
+---
 
-Create Pull Request
+<div align="center">
 
-GitHub Repository:
-https://github.com/Swarup2908/Rtt_monitor
+*Forked from [Swarup2908/Rtt_monitor](https://github.com/Swarup2908/Rtt_monitor) · Enhanced by [vishalbunn](https://github.com/vishalbunn)*
 
-Contributions
-
-• Developed Django backend for RTT monitoring
-• Implemented Celery background tasks for continuous network checks
-• Integrated external APIs for anchor and domain data
-• Built monitoring logic for ping and DNS queries
-• Implemented RTT calculation and network diagnostics
-• Improved API monitoring and endpoint health checks
+</div>
